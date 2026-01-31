@@ -1,11 +1,9 @@
-# ✅ GlassFish Base Image
-FROM airhacks/glassfish
+FROM tomcat:9.0
 
-# ✅ Copy WAR into GlassFish autodeploy folder
-COPY SilverRS.war /opt/glassfish4/glassfish/domains/domain1/autodeploy/
+RUN rm -rf /usr/local/tomcat/webapps/*
 
-# ✅ Expose GlassFish Port
+COPY SilverRS.war /usr/local/tomcat/webapps/ROOT.war
+
 EXPOSE 8080
 
-# ✅ Start GlassFish Server
-CMD ["asadmin", "start-domain", "-v"]
+CMD ["catalina.sh", "run"]
